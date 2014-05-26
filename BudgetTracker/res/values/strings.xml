@@ -9,5 +9,5 @@
     <string name="account_name_prompt">Enter name of new account</string>
     <string name="title_activity_get_new_account">GetNewAccountActivity</string>
     <string name="hello_world">Hello world!</string>
-
+	<string name="new_account">New</string>
 </resources>

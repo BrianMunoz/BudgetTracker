@@ -17,14 +17,22 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		Intent intent = getIntent();
+		
 		String prompt = getString(R.string.new_account_prompt);
 		TextView textView = new TextView(this);
 		textView.setTextSize(40);
 		textView.setText(prompt);
 
-		setContentView(textView);
+		setContentView(R.layout.fragment_main); 
+		
 	}
 
+	public void onCreateNewAccount(View view){
+		Intent intent = new Intent(this, GetNewAccountActivity.class );
+		startActivity(intent);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
