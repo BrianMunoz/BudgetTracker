@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Budget Tracker</string>
+    <string name="action_settings">Settings</string>
+    <string name="new_account_prompt">Would you like to create a new account to track?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+	<string name="account_name_prompt">Enter ane of new account</string>
+</resources>
