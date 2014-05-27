@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	public void onCreateNewAccount(View view){
-		Intent intent = new Intent(this, GetNewAccountActivity.class );
+		Intent intent = new Intent(this, CreateNewAccountActivity.class );
 		startActivity(intent);
 	}
 	

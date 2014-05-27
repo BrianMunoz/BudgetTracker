@@ -6,8 +6,10 @@
     <string name="new_account_prompt">Would you like to create a new account to track?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="account_name_prompt">Enter name of new account</string>
-    <string name="title_activity_get_new_account">GetNewAccountActivity</string>
+    <string name="title_activity_create_new_account">New Account</string>
     <string name="hello_world">Hello world!</string>
 	<string name="new_account">New</string>
+	<string name="account_name">Account Name: </string>
+	<string name="starting_balance">Starting Balance: </string>
+	<string name="save">Save</string>
 </resources>

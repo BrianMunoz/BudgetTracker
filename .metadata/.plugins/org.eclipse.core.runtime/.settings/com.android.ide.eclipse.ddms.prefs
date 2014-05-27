@@ -1,3 +1,4 @@
+com.android.ide.eclipse.ddms.timeOut=10000
 ddms.logcat.auotmonitor.level=error
 ddms.logcat.automonitor.userprompt=true
 eclipse.preferences.version=1
