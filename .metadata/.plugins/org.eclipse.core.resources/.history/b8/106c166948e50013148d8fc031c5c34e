@@ -1,0 +1,29 @@
+package models;
+
+public class AccountModel {
+	private double currentBalance;
+	private String accountName;
+	
+	/**
+	 * The constructor for creating a new model from the new account activity.
+	 * @param startingAmount String the starting balance of a new account
+	 * @param accountName String the user defined name of the account
+	 */
+	public AccountModel(double startingAmount, String accountName){
+		currentBalance = startingAmount;
+		this.accountName = accountName;
+	}
+	
+	public String getAccountName(){
+		return accountName;
+	}
+	
+	public void setCurrentBalance(double newAmount){
+		currentBalance = newAmount;
+	}
+	
+	public double getCurrentBalance(){
+		return currentBalance;
+	}
+	
+}

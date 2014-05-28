@@ -8,8 +8,10 @@
     <string name="no">No</string>
     <string name="title_activity_create_new_account">New Account</string>
     <string name="hello_world">Hello world!</string>
-	<string name="new_account">New</string>
-	<string name="account_name">Account Name: </string>
-	<string name="starting_balance">Starting Balance: </string>
-	<string name="save">Save</string>
+    <string name="new_account">New</string>
+    <string name="account_name">Account Name: </string>
+    <string name="starting_balance">Starting Balance: </string>
+    <string name="save">Save</string>
+    <string name="title_activity_display_account">DisplayAccountActivity</string>
+
 </resources>
