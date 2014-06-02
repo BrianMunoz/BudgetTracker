@@ -5,4 +5,6 @@
 <fullyQualifiedTypeName name="com.example.budgettracker.R.layout"/>
 <fullyQualifiedTypeName name="com.example.budgettracker.R.id"/>
 <fullyQualifiedTypeName name="android.os.Parcelable.Creator"/>
+<fullyQualifiedTypeName name="com.example.utilities.BudgetTrackerContract.AccountEntry"/>
+<fullyQualifiedTypeName name="android.accounts.Account"/>
 </qualifiedTypeNameHistroy>

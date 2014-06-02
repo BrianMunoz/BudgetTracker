@@ -1,6 +1,9 @@
 package com.example.budgettracker;
 
+import android.accounts.Account;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.utilities.BudgetTrackerContract.AccountEntry;
+import com.example.utilities.DatabaseUtility;
+
 public class MainActivity extends ActionBarActivity {
 
 	@Override
@@ -18,6 +24,12 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 
 		Intent intent = getIntent();
+		
+		DatabaseUtility dbu = new DatabaseUtility(getBaseContext());
+		SQLiteDatabase db = dbu.getReadableDatabase();
+		
+
+		Cursor c = db.query(AccountEntry.TABLE_NAME, null , null, null, null, null, AccountEntry.COLUMN_ACCOUNT_NAME + " ASC" );
 		
 		String prompt = getString(R.string.new_account_prompt);
 		TextView textView = new TextView(this);
@@ -30,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
 	public void onCreateNewAccount(View view){
 		Intent intent = new Intent(this, CreateNewAccountActivity.class );
+		
 		startActivity(intent);
 	}
 	

@@ -1,7 +1,9 @@
 package com.example.budgettracker;
 
 import models.AccountModel;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.example.utilities.BudgetTrackerContract.AccountEntry;
+import com.example.utilities.DatabaseUtility;
 
 public class CreateNewAccountActivity extends ActionBarActivity {
 	public static final String MODEL = "com.example.budgettracker.MODEL"; 
@@ -42,8 +47,16 @@ public class CreateNewAccountActivity extends ActionBarActivity {
 		//TODO: make sure to save the new account to persist the data.
 		Intent intent = new Intent(this, DisplayAccountActivity.class);
 		intent.putExtra(MODEL, model);
+		
+		DatabaseUtility dbHelper = new DatabaseUtility(getBaseContext());
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		ContentValues values = new ContentValues();
+		values.put(AccountEntry.COLUMN_ACCOUNT_NAME, model.getAccountName());
+		values.put(AccountEntry.COLUMN_BALANCE, model.getCurrentBalance());
+		double newRowId;
+		newRowId = db.insert(AccountEntry.TABLE_NAME, null ,values);
 		startActivity(intent);
-		finish();
 	}
 
 	@Override
