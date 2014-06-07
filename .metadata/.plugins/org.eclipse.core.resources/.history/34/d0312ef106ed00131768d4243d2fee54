@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
 			balance = table.getDouble(balanceIndex);
 			
 			AccountModel account = new AccountModel(balance, accountName);
-			
+			listView.addView(account, i);
 		}
 		
 		

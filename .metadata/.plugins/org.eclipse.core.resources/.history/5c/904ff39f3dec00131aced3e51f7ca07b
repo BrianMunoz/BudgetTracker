@@ -2,7 +2,6 @@ package com.example.budgettracker;
 
 import java.util.ArrayList;
 
-import models.AccountModel;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -32,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
 		Cursor c = db.query(AccountEntry.TABLE_NAME, null , null, null, null, null, AccountEntry.COLUMN_ACCOUNT_NAME + " ASC" );
 		int anyRows = c.getColumnCount();
 		if (anyRows >0 ){
-			populateAccountList( c );
+			populateAccountList(Cursor table);
 		}
 		
 		String prompt = getString(R.string.new_account_prompt);
@@ -53,10 +52,8 @@ public class MainActivity extends ActionBarActivity {
 	public void populateAccountList(Cursor table){
 		String accountName;
 		double balance;
-		ArrayList<AccountModel> accounts = new ArrayList<AccountModel>();
+		ArrayList<ListView> accounts = new ArrayList<ListView>();
 		int nameIndex, balanceIndex;
-		ListView listView = new ListView(this);
-		
 		
 		table.moveToFirst();
 		for (int i = 0; i < table.getCount(); i++){
@@ -65,12 +62,8 @@ public class MainActivity extends ActionBarActivity {
 			
 			accountName = table.getString(nameIndex);
 			balance = table.getDouble(balanceIndex);
-			
-			AccountModel account = new AccountModel(balance, accountName);
-			
+			ListViewItem account = new ListViewItem();
 		}
-		
-		
 		
 	}
 	

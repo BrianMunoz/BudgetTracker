@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.utilities.BudgetTrackerContract.AccountEntry;
@@ -32,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
 		Cursor c = db.query(AccountEntry.TABLE_NAME, null , null, null, null, null, AccountEntry.COLUMN_ACCOUNT_NAME + " ASC" );
 		int anyRows = c.getColumnCount();
 		if (anyRows >0 ){
-			populateAccountList( c );
+			populateAccountList(Cursor table);
 		}
 		
 		String prompt = getString(R.string.new_account_prompt);
@@ -55,8 +54,6 @@ public class MainActivity extends ActionBarActivity {
 		double balance;
 		ArrayList<AccountModel> accounts = new ArrayList<AccountModel>();
 		int nameIndex, balanceIndex;
-		ListView listView = new ListView(this);
-		
 		
 		table.moveToFirst();
 		for (int i = 0; i < table.getCount(); i++){
@@ -67,10 +64,8 @@ public class MainActivity extends ActionBarActivity {
 			balance = table.getDouble(balanceIndex);
 			
 			AccountModel account = new AccountModel(balance, accountName);
-			
+			accounts.add(account);
 		}
-		
-		
 		
 	}
 	

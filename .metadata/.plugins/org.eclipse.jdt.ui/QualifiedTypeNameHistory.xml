@@ -3,8 +3,8 @@
 <fullyQualifiedTypeName name="com.example.budgettracker.R.string"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.example.budgettracker.R.layout"/>
-<fullyQualifiedTypeName name="com.example.budgettracker.R.id"/>
 <fullyQualifiedTypeName name="android.os.Parcelable.Creator"/>
 <fullyQualifiedTypeName name="com.example.utilities.BudgetTrackerContract.AccountEntry"/>
 <fullyQualifiedTypeName name="android.accounts.Account"/>
+<fullyQualifiedTypeName name="com.example.budgettracker.R.id"/>
 </qualifiedTypeNameHistroy>

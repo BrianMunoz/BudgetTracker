@@ -39,13 +39,11 @@ public class AccountModel implements Parcelable {
 
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void writeToParcel(Parcel destination, int flags) {
-		// TODO Auto-generated method stub
 		destination.writeStringArray(new String[]{this.accountName, Double.toString(this.currentBalance)});
 	}
 	public static final Parcelable.Creator<AccountModel> CREATOR = new Parcelable.Creator<AccountModel>(){

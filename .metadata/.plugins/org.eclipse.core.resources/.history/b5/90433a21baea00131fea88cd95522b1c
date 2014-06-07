@@ -1,17 +1,17 @@
 package com.example.budgettracker;
 
-import java.util.ArrayList;
-
-import models.AccountModel;
+import android.accounts.Account;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.utilities.BudgetTrackerContract.AccountEntry;
@@ -31,8 +31,10 @@ public class MainActivity extends ActionBarActivity {
 
 		Cursor c = db.query(AccountEntry.TABLE_NAME, null , null, null, null, null, AccountEntry.COLUMN_ACCOUNT_NAME + " ASC" );
 		int anyRows = c.getColumnCount();
+	
 		if (anyRows >0 ){
-			populateAccountList( c );
+			String name = c.getString(c.getColumnIndex(AccountEntry.COLUMN_ACCOUNT_NAME));
+			
 		}
 		
 		String prompt = getString(R.string.new_account_prompt);
@@ -49,31 +51,6 @@ public class MainActivity extends ActionBarActivity {
 		
 		startActivity(intent);
 	}
-	
-	public void populateAccountList(Cursor table){
-		String accountName;
-		double balance;
-		ArrayList<AccountModel> accounts = new ArrayList<AccountModel>();
-		int nameIndex, balanceIndex;
-		ListView listView = new ListView(this);
-		
-		
-		table.moveToFirst();
-		for (int i = 0; i < table.getCount(); i++){
-			nameIndex = table.getColumnIndex(AccountEntry.COLUMN_ACCOUNT_NAME);
-			balanceIndex = table.getColumnIndex(AccountEntry.COLUMN_BALANCE);
-			
-			accountName = table.getString(nameIndex);
-			balance = table.getDouble(balanceIndex);
-			
-			AccountModel account = new AccountModel(balance, accountName);
-			
-		}
-		
-		
-		
-	}
-	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,6 +70,23 @@ public class MainActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_main, container,
+					false);
+			return rootView;
+		}
 	}
 
 }
