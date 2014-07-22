@@ -2,9 +2,16 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.example.budgettracker.R.string"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
-<fullyQualifiedTypeName name="com.example.budgettracker.R.layout"/>
 <fullyQualifiedTypeName name="android.os.Parcelable.Creator"/>
 <fullyQualifiedTypeName name="com.example.utilities.BudgetTrackerContract.AccountEntry"/>
 <fullyQualifiedTypeName name="android.accounts.Account"/>
+<fullyQualifiedTypeName name="android.widget.ArrayAdapter"/>
+<fullyQualifiedTypeName name="models.AccountModel"/>
+<fullyQualifiedTypeName name="com.example.budgettracker.R"/>
+<fullyQualifiedTypeName name="android.support.v7.appcompat.R.string"/>
+<fullyQualifiedTypeName name="android.app.Fragment"/>
+<fullyQualifiedTypeName name="android.support.v4.app.Fragment"/>
+<fullyQualifiedTypeName name="com.example.budgettracker.R.layout"/>
 <fullyQualifiedTypeName name="com.example.budgettracker.R.id"/>
+<fullyQualifiedTypeName name="android.widget.ListView"/>
 </qualifiedTypeNameHistroy>
