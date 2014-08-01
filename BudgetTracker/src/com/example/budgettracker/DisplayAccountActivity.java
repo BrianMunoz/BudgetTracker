@@ -1,6 +1,7 @@
 package com.example.budgettracker;
 
-import models.AccountModel;
+import com.example.models.AccountModel;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;

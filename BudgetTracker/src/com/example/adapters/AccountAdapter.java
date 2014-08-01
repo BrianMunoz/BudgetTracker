@@ -2,7 +2,6 @@ package com.example.adapters;
 
 import java.util.List;
 
-import models.AccountModel;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.budgettracker.R;
+import com.example.models.AccountModel;
 
 public class AccountAdapter extends ArrayAdapter<AccountModel> {
 	int resource;

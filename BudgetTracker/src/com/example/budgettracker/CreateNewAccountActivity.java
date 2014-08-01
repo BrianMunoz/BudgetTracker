@@ -1,6 +1,5 @@
 package com.example.budgettracker;
 
-import models.AccountModel;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.models.AccountModel;
 import com.example.utilities.BudgetTrackerContract.AccountEntry;
 import com.example.utilities.DatabaseUtility;
 
@@ -91,7 +91,7 @@ public class CreateNewAccountActivity extends ActionBarActivity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(
-					R.layout.fragment_create_new_account, container, false);
+					R.layout.create_new_account_fragment, container, false);
 			return rootView;
 		}
 	}

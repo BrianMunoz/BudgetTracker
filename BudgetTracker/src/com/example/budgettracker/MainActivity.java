@@ -1,20 +1,16 @@
 package com.example.budgettracker;
 
-import java.util.ArrayList;
-
-import models.AccountModel;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.example.adapters.AccountAdapter;
+import com.example.fragments.AccountListFragment;
+import com.example.fragments.CreateNewAccountFragment;
 import com.example.utilities.BudgetTrackerContract.AccountEntry;
 import com.example.utilities.DatabaseUtility;
 
@@ -23,23 +19,27 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setContentView(R.layout.activity_main);
+				
+		AccountListFragment accountListFragment = new AccountListFragment();
+		CreateNewAccountFragment newAccount = new CreateNewAccountFragment();
+		
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+		
+		transaction.add(R.id.account_list_frame, accountListFragment);
+		transaction.add(R.id.create_new_account_frame, newAccount);
+		
+		transaction.commit();
+		/*	
 		DatabaseUtility dbu = new DatabaseUtility(getBaseContext());
 		SQLiteDatabase db = dbu.getReadableDatabase();
-		setContentView(R.layout.fragment_account_listview);
-
+		
 		Cursor c = db.query(AccountEntry.TABLE_NAME, null, null, null, null,
 				null, AccountEntry.COLUMN_ACCOUNT_NAME + " ASC");
 		int anyRows = c.getCount();
 		if (anyRows > 0) {
-			populateAccountList(c);
-		} else {
-			String prompt = getString(R.string.new_account_prompt);
-			TextView textView = new TextView(this);
-			textView.setTextSize(40);
-			textView.setText(prompt);
-			setContentView(R.layout.fragment_main);
-		}
+			accountListFragment.populateAccountList(c, this);
+		} */
 	}
 
 	public void onCreateNewAccount(View view) {
@@ -48,36 +48,12 @@ public class MainActivity extends FragmentActivity {
 		startActivity(intent);
 	}
 
-	public void populateAccountList(Cursor table) {
-		String accountName;
-		double balance;
-		ArrayList<AccountModel> accounts = new ArrayList<AccountModel>();
-		int nameIndex, balanceIndex;
-		ListView list = (ListView) findViewById(R.id.accountList);
-
-		table.moveToFirst();
-		for (int i = 0; i < table.getCount(); i++) {
-			nameIndex = table.getColumnIndex(AccountEntry.COLUMN_ACCOUNT_NAME);
-			balanceIndex = table.getColumnIndex(AccountEntry.COLUMN_BALANCE);
-
-			accountName = table.getString(nameIndex);
-			balance = table.getDouble(balanceIndex);
-
-			AccountModel account = new AccountModel(balance, accountName);
-			accounts.add(account);
-			table.moveToNext();
-		}
-		AccountAdapter adapter = new AccountAdapter(this,
-				R.layout.account_list_items, accounts);
-		list.setAdapter(adapter);
-
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+	//	getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
