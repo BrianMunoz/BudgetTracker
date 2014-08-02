@@ -45,7 +45,7 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public void onStart(){
 		super.onStart();
-		
+		/*
 		DatabaseUtility dbu = new DatabaseUtility(getBaseContext());
 		SQLiteDatabase db = dbu.getReadableDatabase();
 		
@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity {
 		int anyRows = c.getCount();
 		if (anyRows > 0) {
 			accountListFragment.populateAccountList(c, this);
-		}
+		}*/
 	}
 
 	@Override

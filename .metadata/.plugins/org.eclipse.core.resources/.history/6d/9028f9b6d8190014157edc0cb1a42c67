@@ -44,7 +44,6 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	public void onStart(){
-		super.onStart();
 		
 		DatabaseUtility dbu = new DatabaseUtility(getBaseContext());
 		SQLiteDatabase db = dbu.getReadableDatabase();

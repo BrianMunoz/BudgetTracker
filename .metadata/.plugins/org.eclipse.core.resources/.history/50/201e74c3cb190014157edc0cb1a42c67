@@ -15,17 +15,14 @@ import com.example.utilities.BudgetTrackerContract.AccountEntry;
 import com.example.utilities.DatabaseUtility;
 
 public class MainActivity extends FragmentActivity {
-	
-	AccountListFragment accountListFragment;
-	CreateNewAccountFragment newAccount;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 				
-		accountListFragment = new AccountListFragment();
-		newAccount = new CreateNewAccountFragment();
+		AccountListFragment accountListFragment = new AccountListFragment();
+		CreateNewAccountFragment newAccount = new CreateNewAccountFragment();
 		
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		
@@ -33,19 +30,7 @@ public class MainActivity extends FragmentActivity {
 		transaction.add(R.id.create_new_account_frame, newAccount);
 		
 		transaction.commit();
-		 
-	}
-
-	public void onCreateNewAccount(View view) {
-		Intent intent = new Intent(this, CreateNewAccountActivity.class);
-
-		startActivity(intent);
-	}
-
-	@Override
-	public void onStart(){
-		super.onStart();
-		
+		/*	
 		DatabaseUtility dbu = new DatabaseUtility(getBaseContext());
 		SQLiteDatabase db = dbu.getReadableDatabase();
 		
@@ -54,8 +39,15 @@ public class MainActivity extends FragmentActivity {
 		int anyRows = c.getCount();
 		if (anyRows > 0) {
 			accountListFragment.populateAccountList(c, this);
-		}
+		} */
 	}
+
+	public void onCreateNewAccount(View view) {
+		Intent intent = new Intent(this, CreateNewAccountActivity.class);
+
+		startActivity(intent);
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
