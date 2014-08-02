@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -15,42 +16,69 @@ import android.widget.ListView;
 import com.example.adapters.AccountAdapter;
 import com.example.budgettracker.R;
 import com.example.models.AccountModel;
+import com.example.utilities.DatabaseUtility;
 import com.example.utilities.BudgetTrackerContract.AccountEntry;
 
 public class AccountListFragment extends Fragment {
 
-	
 	Context context;
 	View view;
 
-	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		view = inflater.inflate(R.layout.account_list_fragment, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		view = inflater.inflate(R.layout.account_list_fragment, container,
+				false);
 
 		return view;
 	}
 
-	public void populateAccountList(Cursor table, Context context) {
+	public void refreshList(AccountModel account) {
+		
+		ListView list = (ListView) view;
+
+		AccountAdapter adapter = (AccountAdapter) list.getAdapter();
+		adapter.add(account);
+
+		adapter.notifyDataSetChanged();
+		view.refreshDrawableState();
+	}
+
+	public void populateAccountList() {
 		String accountName;
 		double balance;
+
+		DatabaseUtility dbu = new DatabaseUtility(view.getContext());
+		SQLiteDatabase db = dbu.getReadableDatabase();
+		Cursor table = db.query(AccountEntry.TABLE_NAME, null, null, null,
+				null, null, AccountEntry.COLUMN_ACCOUNT_NAME + " ASC");
+
+		int anyRows = table.getCount();
 		ArrayList<AccountModel> accounts = new ArrayList<AccountModel>();
-		int nameIndex, balanceIndex;
-		ListView list = (ListView) view;
-		table.moveToFirst();
-		for (int i = 0; i < table.getCount(); i++) {
-			nameIndex = table.getColumnIndex(AccountEntry.COLUMN_ACCOUNT_NAME);
-			balanceIndex = table.getColumnIndex(AccountEntry.COLUMN_BALANCE);
 
-			accountName = table.getString(nameIndex);
-			balance = table.getDouble(balanceIndex);
+		if (anyRows > 0) {
+			int nameIndex, balanceIndex;
+			ListView list = (ListView) view;
+			table.moveToFirst();
+			for (int i = 0; i < table.getCount(); i++) {
+				nameIndex = table
+						.getColumnIndex(AccountEntry.COLUMN_ACCOUNT_NAME);
+				balanceIndex = table
+						.getColumnIndex(AccountEntry.COLUMN_BALANCE);
 
-			AccountModel account = new AccountModel(balance, accountName);
-			accounts.add(account);
-			table.moveToNext();
+				accountName = table.getString(nameIndex);
+				balance = table.getDouble(balanceIndex);
+
+				AccountModel account = new AccountModel(balance, accountName);
+				accounts.add(account);
+				table.moveToNext();
+			}
+			AccountAdapter adapter = new AccountAdapter(view.getContext(),
+					R.layout.account_list_items, accounts);
+			list.setAdapter(adapter);
+			table.close();
+			db.close();
 		}
-		AccountAdapter adapter = new AccountAdapter(context,R.layout.account_list_items, accounts);
-		list.setAdapter(adapter);
-
 	}
+
 }

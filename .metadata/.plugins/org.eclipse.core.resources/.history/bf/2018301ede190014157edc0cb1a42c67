@@ -1,0 +1,54 @@
+package com.example.fragments;
+
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.example.budgettracker.DisplayAccountActivity;
+import com.example.budgettracker.R;
+import com.example.models.AccountModel;
+import com.example.utilities.BudgetTrackerContract.AccountEntry;
+import com.example.utilities.DatabaseUtility;
+
+public class CreateNewAccountFragment extends Fragment {
+	
+	View view;
+	String accountName;
+	Double accountBalance;
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedIsnatcesState){
+		view = inflater.inflate(R.layout.create_new_account_fragment, container, false);
+		
+		return view;
+	}
+	
+	public void onSaveAccount(){
+		EditText editText = (EditText) findViewById(R.id.account_name);
+		accountName = editText.getText().toString();
+		editText = (EditText) findViewById(R.id.starting_balance);
+		String temp = editText.getText().toString();
+		accountBalance = Double.parseDouble(temp);
+
+		AccountModel model = new AccountModel(accountBalance, accountName);
+		//TODO: make sure to save the new account to persist the data.
+		Intent intent = new Intent(this, DisplayAccountActivity.class);
+		intent.putExtra(MODEL, model);
+		
+		DatabaseUtility dbHelper = new DatabaseUtility(getBaseContext());
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		ContentValues values = new ContentValues();
+		values.put(AccountEntry.COLUMN_ACCOUNT_NAME, model.getAccountName());
+		values.put(AccountEntry.COLUMN_BALANCE, model.getCurrentBalance());
+		double newRowId;
+		newRowId = db.insert(AccountEntry.TABLE_NAME, null ,values);
+		startActivity(intent);
+	} 
+}

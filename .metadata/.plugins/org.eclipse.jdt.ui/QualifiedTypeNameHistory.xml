@@ -9,13 +9,15 @@
 <fullyQualifiedTypeName name="models.AccountModel"/>
 <fullyQualifiedTypeName name="android.support.v7.appcompat.R.string"/>
 <fullyQualifiedTypeName name="android.app.Fragment"/>
-<fullyQualifiedTypeName name="com.example.budgettracker.R.id"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
 <fullyQualifiedTypeName name="android.support.v4.app.Fragment"/>
 <fullyQualifiedTypeName name="android.support.v7.appcompat.R"/>
-<fullyQualifiedTypeName name="com.example.budgettracker.R"/>
 <fullyQualifiedTypeName name="android.support.v4.app.ListFragment"/>
 <fullyQualifiedTypeName name="android.app.FragmentTransaction"/>
 <fullyQualifiedTypeName name="android.support.v4.app.FragmentTransaction"/>
 <fullyQualifiedTypeName name="com.example.budgettracker.R.layout"/>
+<fullyQualifiedTypeName name="com.example.budgettracker.R"/>
+<fullyQualifiedTypeName name="com.example.budgettracker.R.id"/>
+<fullyQualifiedTypeName name="com.example.fragments.CreateNewAccountFragment.OnAccountModelSavedListener"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 </qualifiedTypeNameHistroy>

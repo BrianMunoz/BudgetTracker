@@ -1,39 +1,38 @@
 package com.example.budgettracker;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.example.fragments.AccountListFragment;
 import com.example.fragments.CreateNewAccountFragment;
-import com.example.utilities.BudgetTrackerContract.AccountEntry;
-import com.example.utilities.DatabaseUtility;
+import com.example.models.AccountModel;
 
-public class MainActivity extends FragmentActivity {
-	
+public class MainActivity extends FragmentActivity implements CreateNewAccountFragment.OnAccountModelSavedListener{
+
 	AccountListFragment accountListFragment;
 	CreateNewAccountFragment newAccount;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-				
+
 		accountListFragment = new AccountListFragment();
 		newAccount = new CreateNewAccountFragment();
-		
-		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-		
+
+		FragmentTransaction transaction = getSupportFragmentManager()
+				.beginTransaction();
+
 		transaction.add(R.id.account_list_frame, accountListFragment);
 		transaction.add(R.id.create_new_account_frame, newAccount);
-		
+
 		transaction.commit();
-		 
+
 	}
 
 	public void onCreateNewAccount(View view) {
@@ -43,25 +42,17 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	@Override
-	public void onStart(){
+	public void onStart() {
 		super.onStart();
-		
-		DatabaseUtility dbu = new DatabaseUtility(getBaseContext());
-		SQLiteDatabase db = dbu.getReadableDatabase();
-		
-		Cursor c = db.query(AccountEntry.TABLE_NAME, null, null, null, null,
-				null, AccountEntry.COLUMN_ACCOUNT_NAME + " ASC");
-		int anyRows = c.getCount();
-		if (anyRows > 0) {
-			accountListFragment.populateAccountList(c, this);
-		}
+
+		accountListFragment.populateAccountList();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-	//	getMenuInflater().inflate(R.menu.main, menu);
+		// getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -75,6 +66,12 @@ public class MainActivity extends FragmentActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onAccountSaved(AccountModel account) {
+		// TODO Auto-generated method stub
+		accountListFragment.refreshList(account);
 	}
 
 }
