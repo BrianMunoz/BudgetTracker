@@ -43,17 +43,26 @@ public class AccountListFragment extends Fragment {
 				if (swipeDetector.swipeDetected()){
 					deleteItemFromList(position);
 				}else{
-					//TODO: implement the click
+					displayClickedItem(position);
 				}
 			}
+
+			
 		});
 		
 	}
 	
-	public void deleteItemFromList(int position){
+	private void displayClickedItem(int position) {
+		AccountAdapter adapter = (AccountAdapter) view.getAdapter();
+		AccountModel model = adapter.getItem(position);
+		
+	}
+	
+	private void deleteItemFromList(int position){
 		AccountAdapter adapter = (AccountAdapter) view.getAdapter();
 		AccountModel item = adapter.getItem(position);
 		adapter.remove(item);
+		removeItemFromDatabase(item.getAccountName());
 		
 		adapter.notifyDataSetChanged();
 		view.refreshDrawableState();
@@ -67,6 +76,13 @@ public class AccountListFragment extends Fragment {
 		view.refreshDrawableState();
 	}
 
+	private void removeItemFromDatabase(String name){
+		DatabaseUtility dbu = new DatabaseUtility(view.getContext());
+		SQLiteDatabase db = dbu.getReadableDatabase();
+		db.execSQL("DELETE from " + AccountEntry.TABLE_NAME +
+				" WHERE " + AccountEntry.COLUMN_ACCOUNT_NAME + "='" + name +"'");
+	}
+	
 	public void populateAccountList() {
 		String accountName;
 		double balance;
