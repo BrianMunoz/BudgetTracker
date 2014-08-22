@@ -7,60 +7,41 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.adapters.AccountAdapter;
 import com.example.budgettracker.R;
 import com.example.models.AccountModel;
-import com.example.utilities.BudgetTrackerContract.AccountEntry;
 import com.example.utilities.DatabaseUtility;
-import com.example.utilities.SwipeDetectorUtility;
+import com.example.utilities.BudgetTrackerContract.AccountEntry;
 
 public class AccountListFragment extends Fragment {
 
 	Context context;
-	ListView view;
-	private final SwipeDetectorUtility swipeDetector = new SwipeDetectorUtility();
+	View view;
+	
+	private int MinSwipeDistance;
+	private int SwipeMaxOffPath;
+	private int SwipeThresholdVelocity;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = (ListView) inflater.inflate(R.layout.account_list_fragment, container,
+		view = inflater.inflate(R.layout.account_list_fragment, container,
 				false);
-		view.setOnTouchListener(swipeDetector);
-		setOnClickListener();
+
 		return view;
 	}
 
-	private void setOnClickListener(){
-		view.setOnItemClickListener(new OnItemClickListener(){
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-				if (swipeDetector.swipeDetected()){
-					deleteItemFromList(position);
-				}else{
-					//TODO: implement the click
-				}
-			}
-		});
-		
-	}
-	
-	public void deleteItemFromList(int position){
-		AccountAdapter adapter = (AccountAdapter) view.getAdapter();
-		AccountModel item = adapter.getItem(position);
-		adapter.remove(item);
-		
-		adapter.notifyDataSetChanged();
-		view.refreshDrawableState();
-	}
-	
 	public void refreshList(AccountModel account) {
-		AccountAdapter adapter = (AccountAdapter) view.getAdapter();
+		
+		ListView list = (ListView) view;
+
+		AccountAdapter adapter = (AccountAdapter) list.getAdapter();
 		adapter.add(account);
 
 		adapter.notifyDataSetChanged();
@@ -81,6 +62,7 @@ public class AccountListFragment extends Fragment {
 
 		if (anyRows > 0) {
 			int nameIndex, balanceIndex;
+			ListView list = (ListView) view;
 			table.moveToFirst();
 			for (int i = 0; i < table.getCount(); i++) {
 				nameIndex = table
@@ -97,10 +79,19 @@ public class AccountListFragment extends Fragment {
 			}
 			AccountAdapter adapter = new AccountAdapter(view.getContext(),
 					R.layout.account_list_items, accounts);
-			view.setAdapter(adapter);
+			list.setAdapter(adapter);
 			table.close();
 			db.close();
 		}
+		
+	}
+		
+	public void getSwipeItem(int position){
+		ListView list = (ListView) view;
+		AccountAdapter adapter = (AccountAdapter)list.getAdapter();
+		AccountModel item = adapter.getItem(position);
+		adapter.remove(item);
+		
 		
 	}
 
