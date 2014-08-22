@@ -63,7 +63,7 @@ public class AccountListFragment extends Fragment {
 		AccountAdapter adapter = (AccountAdapter) view.getAdapter();
 		AccountModel model = adapter.getItem(position);
 		Intent intent = new Intent(view.getContext(), DisplayAccountActivity.class);
-		intent.putExtra(MODEL, model);
+		intent.putExtra("ACCOUNT_MODEL", model);
 		
 		getActivity().startActivity(intent);
 	}

@@ -37,11 +37,11 @@ public class SwipeDetectorUtility implements View.OnTouchListener{
 			}
 		case MotionEvent.ACTION_MOVE:
 			{
-				lastX = moveEvent.getX();
+				firstX = moveEvent.getX();
 				float deltaX = firstX - lastX;
 				if (Math.abs(deltaX) > MINIMUM_HORIZONTAL_DISTANCE){
 					lastSwipeDirection =(deltaX < 0) ? SwipeDirection.LeftToRight : SwipeDirection.RightToLeft ;
-					return false;
+					
 				}
 				return true;
 			}

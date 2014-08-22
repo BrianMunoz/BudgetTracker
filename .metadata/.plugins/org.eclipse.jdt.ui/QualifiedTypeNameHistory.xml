@@ -20,4 +20,9 @@
 <fullyQualifiedTypeName name="com.example.budgettracker.R.id"/>
 <fullyQualifiedTypeName name="com.example.fragments.CreateNewAccountFragment.OnAccountModelSavedListener"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.example.utilities.SwipeDetectorUtility.SwipeDirection"/>
+<fullyQualifiedTypeName name="android.support.v7.internal.widget.AdapterViewICS.OnItemClickListener"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemLongClickListener"/>
+<fullyQualifiedTypeName name="android.app.FragmentManager"/>
 </qualifiedTypeNameHistroy>

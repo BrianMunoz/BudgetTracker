@@ -29,7 +29,6 @@ public class AccountListFragment extends Fragment {
 	Context context;
 	ListView view;
 	private final SwipeDetectorUtility swipeDetector = new SwipeDetectorUtility();
-	public static final String MODEL = "com.example.budgettracker.MODEL"; 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +62,7 @@ public class AccountListFragment extends Fragment {
 		AccountAdapter adapter = (AccountAdapter) view.getAdapter();
 		AccountModel model = adapter.getItem(position);
 		Intent intent = new Intent(view.getContext(), DisplayAccountActivity.class);
-		intent.putExtra(MODEL, model);
+		intent.putExtra("ACCOUNT_MODEL", model);
 		
 		getActivity().startActivity(intent);
 	}
